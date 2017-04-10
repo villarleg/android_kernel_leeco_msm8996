@@ -93,6 +93,8 @@ static int msm_cpp_send_command_to_hardware(struct cpp_device *cpp_dev,
 
 static  int msm_cpp_update_gdscr_status(struct cpp_device *cpp_dev,
 	bool status);
+static int msm_cpp_buffer_private_ops(struct cpp_device *cpp_dev,
+	uint32_t buff_mgr_ops, uint32_t id, void *arg);
 static void msm_cpp_set_micro_irq_mask(struct cpp_device *cpp_dev,
 	uint8_t enable, uint32_t irq_mask);
 static void msm_cpp_flush_queue_and_release_buffer(struct cpp_device *cpp_dev,
