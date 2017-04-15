@@ -1550,46 +1550,11 @@ static void qpnp_hap_td_enable(struct timed_output_dev *dev, int value)
 	struct qpnp_hap *hap = container_of(dev, struct qpnp_hap,
 					 timed_dev);
 
-	mutex_lock(&hap->lock);
-
-	if (hap->act_type == QPNP_HAP_LRA &&
-				hap->correct_lra_drive_freq)
-		hrtimer_cancel(&hap->auto_res_err_poll_timer);
-
-	hrtimer_cancel(&hap->hap_timer);
-
-	if (value == 0) {
-		if (hap->state == 0) {
-			mutex_unlock(&hap->lock);
-			return;
-		}
-		hap->state = 0;
-	} else {
-		value = (value > hap->timeout_ms ?
-				 hap->timeout_ms : value);
-		hap->state = 1;
-		hrtimer_start(&hap->hap_timer,
-			      ktime_set(value / 1000, (value % 1000) * 1000000),
-			      HRTIMER_MODE_REL);
-<<<<<<< HEAD
-	}
-	mutex_unlock(&hap->lock);
-	schedule_work(&hap->work);
-=======
-}
-
-/* enable interface from timed output class */
-static void qpnp_hap_td_enable(struct timed_output_dev *dev, int value)
-{
-	struct qpnp_hap *hap = container_of(dev, struct qpnp_hap,
-					 timed_dev);
-
 	spin_lock(&hap->td_lock);
 	hap->td_value = value;
 	spin_unlock(&hap->td_lock);
 
 	queue_work(hap->wq, &hap->td_work);
->>>>>>> 6912a60... msm: qpnp-haptic: Use a high-priority workqueue for haptics
 }
 
 /* play pwm bytes */
