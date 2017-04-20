@@ -63,6 +63,10 @@ enum fps_resolution {
 
 #define DSC_PPS_LEN		128
 
+
+/* HDR propeties count */
+#define DISPLAY_PRIMARIES_COUNT	8	/* WRGB x and y values*/
+
 static inline const char *mdss_panel2str(u32 panel)
 {
 	static const char const *names[] = {
