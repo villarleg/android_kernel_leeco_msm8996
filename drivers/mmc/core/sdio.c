@@ -651,9 +651,7 @@ static int mmc_sdio_init_uhs_card(struct mmc_card *card)
 						      MMC_SEND_TUNING_BLOCK);
 		mmc_host_clk_release(card->host);
 	}
-
 out:
-
 	return err;
 }
 
@@ -748,7 +746,7 @@ try_again:
 	 */
 	if (!powered_resume && (rocr & ocr & R4_18V_PRESENT)) {
 		err = mmc_set_signal_voltage(host, MMC_SIGNAL_VOLTAGE_180,
-					ocr);
+					ocr_card);
 		if (err == -EAGAIN) {
 			sdio_reset(host);
 			mmc_go_idle(host);
