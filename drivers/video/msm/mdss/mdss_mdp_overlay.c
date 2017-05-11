@@ -61,6 +61,12 @@ static struct workqueue_struct *letv_retire_wq;
 #define DFPS_DATA_MAX_FPS 0x7fffffff
 #define DFPS_DATA_MAX_CLK_RATE 250000
 
+#define DFPS_DATA_MAX_HFP 8192
+#define DFPS_DATA_MAX_HBP 8192
+#define DFPS_DATA_MAX_HPW 8192
+#define DFPS_DATA_MAX_FPS 0x7fffffff
+#define DFPS_DATA_MAX_CLK_RATE 250000
+
 static int mdss_mdp_overlay_free_fb_pipe(struct msm_fb_data_type *mfd);
 static int mdss_mdp_overlay_fb_parse_dt(struct msm_fb_data_type *mfd);
 static int mdss_mdp_overlay_off(struct msm_fb_data_type *mfd);
