@@ -1427,45 +1427,45 @@ enum Tfa98xx_Error tfa_dsp_msg_status(Tfa98xx_handle_t handle, int *pRpcStatus) 
 
 const char* tfa98xx_get_i2c_status_id_string(int status)
 {
-        const char* p_id_str;
+        const char ** p_id_str=0;
         char latest_errorstr[64];
 
         switch (status)
         {
                 case Tfa98xx_DSP_Not_Running:
-                        p_id_str = "No response from DSP";
+                        *p_id_str = "No response from DSP";
                         break;
                 case Tfa98xx_I2C_Req_Done:
-                        p_id_str = "Ok";
+                        *p_id_str = "Ok";
                         break;
                 case Tfa98xx_I2C_Req_Busy:
-                        p_id_str = "Request is being processed";
+                        *p_id_str = "Request is being processed";
                         break;
                 case Tfa98xx_I2C_Req_Invalid_M_ID:
-                        p_id_str = "Provided M-ID does not fit in valid rang [0..2]";
+                        *p_id_str = "Provided M-ID does not fit in valid rang [0..2]";
                         break;
                 case Tfa98xx_I2C_Req_Invalid_P_ID:
-                        p_id_str = "Provided P-ID is not valid in the given M-ID context";
+                        *p_id_str = "Provided P-ID is not valid in the given M-ID context";
                         break;
                 case Tfa98xx_I2C_Req_Invalid_CC:
-                        p_id_str = "Invalid channel configuration bits (SC|DS|DP|DC) combination";
+                        *p_id_str = "Invalid channel configuration bits (SC|DS|DP|DC) combination";
                         break;
                 case Tfa98xx_I2C_Req_Invalid_Seq:
-                        p_id_str = "Invalid sequence of commands, in case the DSP expects some commands in a specific order";
+                        *p_id_str = "Invalid sequence of commands, in case the DSP expects some commands in a specific order";
                         break;
                 case Tfa98xx_I2C_Req_Invalid_Param:
-                        p_id_str = "Generic error";
+                        *p_id_str = "Generic error";
                         break;
                 case Tfa98xx_I2C_Req_Buffer_Overflow:
-                        p_id_str = "I2C buffer has overflowed: host has sent too many parameters, memory integrity is not guaranteed";
+                        *p_id_str = "I2C buffer has overflowed: host has sent too many parameters, memory integrity is not guaranteed";
                         break;
                 default:
                         sprintf(latest_errorstr, "Unspecified error (%d)", (int)status);
-                        p_id_str = latest_errorstr;
+                        *p_id_str = latest_errorstr;
                         break;
         }
 
-        return p_id_str;
+        return *p_id_str;
 }
 
 enum Tfa98xx_Error tfa_dsp_msg_read(Tfa98xx_handle_t handle,int length, unsigned char *bytes){
